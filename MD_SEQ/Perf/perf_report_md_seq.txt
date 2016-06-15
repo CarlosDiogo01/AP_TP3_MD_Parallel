@@ -1,0 +1,209 @@
+# ========
+# captured on: Wed Jun 15 19:32:21 2016
+# hostname : compute-641-9.local
+# os release : 2.6.32-279.14.1.el6.x86_64
+# perf version : 4.0.0
+# arch : x86_64
+# nrcpus online : 32
+# nrcpus avail : 32
+# cpudesc : Intel(R) Xeon(R) CPU E5-2650 v2 @ 2.60GHz
+# cpuid : GenuineIntel,6,62,4
+# total memory : 66072876 kB
+# cmdline : /share/jade/SOFT/perf/perf record -e cpu-cycles,instructions,cache-references,cache-misse
+# event : name = cpu-cycles, type = 0, config = 0x0, config1 = 0x0, config2 = 0x0, excl_usr = 0, excl
+# event : name = instructions, type = 0, config = 0x1, config1 = 0x0, config2 = 0x0, excl_usr = 0, ex
+# event : name = cache-references, type = 0, config = 0x2, config1 = 0x0, config2 = 0x0, excl_usr = 0
+# event : name = cache-misses, type = 0, config = 0x3, config1 = 0x0, config2 = 0x0, excl_usr = 0, ex
+# event : name = branch-instructions, type = 0, config = 0x4, config1 = 0x0, config2 = 0x0, excl_usr 
+# event : name = branch-misses, type = 0, config = 0x5, config1 = 0x0, config2 = 0x0, excl_usr = 0, e
+# event : name = bus-cycles, type = 0, config = 0x6, config1 = 0x0, config2 = 0x0, excl_usr = 0, excl
+# event : name = cpu-clock, type = 1, config = 0x0, config1 = 0x0, config2 = 0x0, excl_usr = 0, excl_
+# event : name = task-clock, type = 1, config = 0x1, config1 = 0x0, config2 = 0x0, excl_usr = 0, excl
+= 0, attr_mmap_data = 0, id = { 2496, 2497, 2498, 2499, 2500, 2501, 2502, 2503, 2504, 2505, 2506, 25
+# event : name = page-faults, type = 1, config = 0x2, config1 = 0x0, config2 = 0x0, excl_usr = 0, exc
+# event : name = context-switches, type = 1, config = 0x3, config1 = 0x0, config2 = 0x0, excl_usr = 0
+# event : name = cpu-migrations, type = 1, config = 0x4, config1 = 0x0, config2 = 0x0, excl_usr = 0, 
+# event : name = minor-faults, type = 1, config = 0x5, config1 = 0x0, config2 = 0x0, excl_usr = 0, ex
+# event : name = major-faults, type = 1, config = 0x6, config1 = 0x0, config2 = 0x0, excl_usr = 0, ex
+# event : name = alignment-faults, type = 1, config = 0x7, config1 = 0x0, config2 = 0x0, excl_usr = 0
+# event : name = emulation-faults, type = 1, config = 0x8, config1 = 0x0, config2 = 0x0, excl_usr = 0
+# HEADER_CPU_TOPOLOGY info available, use -I to display
+# HEADER_NUMA_TOPOLOGY info available, use -I to display
+# pmu mappings: cpu = 4, tracepoint = 2, software = 1
+# ========
+#
+# dso: MD_SEQ
+# Samples: 60K of event 'cpu-cycles'
+# Event count (approx.): 37689379124
+#
+# Overhead  Command  Symbol               
+# ........  .......  .....................
+#
+  95.35%  MD_SEQ   [.] force            
+    0.03%  MD_SEQ   [.] domove           
+    0.03%  MD_SEQ   [.] mkekin           
+    0.02%  MD_SEQ   [.] runiters         
+    0.00%  MD_SEQ   [.] seed             
+    0.00%  MD_SEQ   [.] particleGenerate2
+
+
+# Samples: 75K of event 'instructions'
+# Event count (approx.): 45626052978
+#
+# Overhead  Command  Symbol                 
+# ........  .......  .......................
+#
+    97.66%  MD_SEQ   [.] force              
+    0.05%  MD_SEQ   [.] domove             
+    0.04%  MD_SEQ   [.] mkekin             
+    0.01%  MD_SEQ   [.] runiters           
+    0.00%  MD_SEQ   [.] seed               
+    0.00%  MD_SEQ   [.] velocityXYZEscalar 
+    0.00%  MD_SEQ   [.] initialiseParticles
+
+
+# Samples: 38K of event 'cache-references'
+# Event count (approx.): 118324469
+#
+# Overhead  Command  Symbol      
+# ........  .......  ............
+#
+    38.73%  MD_SEQ   [.] force   
+    0.09%  MD_SEQ   [.] runiters
+    0.04%  MD_SEQ   [.] mkekin  
+    0.03%  MD_SEQ   [.] domove  
+
+
+# Samples: 11K of event 'cache-misses'
+# Event count (approx.): 746357
+#
+# Overhead  Command  Symbol      
+# ........  .......  ............
+#
+    27.65%  MD_SEQ   [.] force   
+    7.31%  MD_SEQ   [.] mkekin  
+    2.02%  MD_SEQ   [.] domove  
+    0.42%  MD_SEQ   [.] runiters
+
+
+# Samples: 75K of event 'branch-instructions'
+# Event count (approx.): 11272336357
+#
+# Overhead  Command  Symbol                 
+# ........  .......  .......................
+#
+    98.25%  MD_SEQ   [.] force              
+    0.03%  MD_SEQ   [.] domove             
+    0.01%  MD_SEQ   [.] mkekin             
+    0.00%  MD_SEQ   [.] runiters           
+    0.00%  MD_SEQ   [.] seed               
+    0.00%  MD_SEQ   [.] velocityXYZEscalar 
+    0.00%  MD_SEQ   [.] initialiseParticles
+
+
+# Samples: 75K of event 'branch-misses'
+# Event count (approx.): 306084742
+#
+# Overhead  Command  Symbol      
+# ........  .......  ............
+#
+    99.19%  MD_SEQ   [.] force   
+    0.00%  MD_SEQ   [.] runiters
+    0.00%  MD_SEQ   [.] domove  
+    0.00%  MD_SEQ   [.] seed    
+
+
+# Samples: 60K of event 'bus-cycles'
+# Event count (approx.): 1453448232
+#
+# Overhead  Command  Symbol      
+# ........  .......  ............
+#
+    95.49%  MD_SEQ   [.] force   
+    0.03%  MD_SEQ   [.] domove  
+    0.03%  MD_SEQ   [.] mkekin  
+    0.02%  MD_SEQ   [.] runiters
+
+
+# Samples: 105K of event 'cpu-clock'
+# Event count (approx.): 105105
+#
+# Overhead  Command  Symbol      
+# ........  .......  ............
+#
+    99.70%  MD_SEQ   [.] force   
+    0.04%  MD_SEQ   [.] domove  
+    0.03%  MD_SEQ   [.] runiters
+    0.02%  MD_SEQ   [.] mkekin  
+    0.00%  MD_SEQ   [.] seed    
+
+
+# Samples: 105K of event 'task-clock'
+# Event count (approx.): 105092
+#
+# Overhead  Command  Symbol               
+# ........  .......  .....................
+#
+    99.70%  MD_SEQ   [.] force            
+    0.04%  MD_SEQ   [.] domove           
+    0.03%  MD_SEQ   [.] mkekin           
+    0.02%  MD_SEQ   [.] runiters         
+    0.00%  MD_SEQ   [.] seed             
+    0.00%  MD_SEQ   [.] particleGenerate2
+
+
+# Samples: 8  of event 'page-faults'
+# Event count (approx.): 366
+#
+# Overhead  Command  Symbol
+# ........  .......  ......
+#
+
+
+# Samples: 3K of event 'context-switches'
+# Event count (approx.): 3743
+#
+# Overhead  Command  Symbol
+# ........  .......  ......
+#
+
+
+# Samples: 2  of event 'cpu-migrations'
+# Event count (approx.): 2
+#
+# Overhead  Command  Symbol
+# ........  .......  ......
+#
+
+
+# Samples: 9  of event 'minor-faults'
+# Event count (approx.): 509
+#
+# Overhead  Command  Symbol
+# ........  .......  ......
+#
+
+
+# Samples: 0  of event 'major-faults'
+# Event count (approx.): 0
+#
+# Overhead  Command  Symbol
+# ........  .......  ......
+#
+
+
+# Samples: 0  of event 'alignment-faults'
+# Event count (approx.): 0
+#
+# Overhead  Command  Symbol
+# ........  .......  ......
+#
+
+
+# Samples: 0  of event 'emulation-faults'
+# Event count (approx.): 0
+#
+# Overhead  Command  Symbol
+# ........  .......  ......
+#
+

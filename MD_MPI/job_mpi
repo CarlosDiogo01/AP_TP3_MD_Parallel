@@ -15,7 +15,6 @@ module load gnu/4.9.3
 module load gnu/openmpi_eth/1.8.4
 ompi_info --param mpi all
 
-
 # MD GIT repo should be cloned on HOME!
 cd ~/AP_TP3_MD_Parallel/MD_MPI
 

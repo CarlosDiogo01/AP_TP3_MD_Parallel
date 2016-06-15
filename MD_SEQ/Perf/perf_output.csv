@@ -1,0 +1,16 @@
+cpu-cycles          , 37689379124
+instructions        , 45626052978
+cache-references    , 118324469
+cache-misses        , 746357
+branch-instructions , 11272336357
+branch-misses       , 306084742
+bus-cycles          , 1453448232
+cpu-clock (msec)    , 105105
+task-clock (msec)   , 105092
+page-faults         , 366
+context-switches    , 3743
+cpu-migrations      , 2
+minor-faults        , 509
+major-faults        , 0
+alignment-faults    , 0
+emulation-faults    , 0
