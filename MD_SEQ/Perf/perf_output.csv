@@ -1,17 +1,17 @@
-EVENTS,RESULTS
-cpu-cycles          ,  42601272991 
-instructions        ,  62618564925 
-cache-references    ,     13842293 
-cache-misses        ,       197836 
-branch-instructions ,  15461960075 
-branch-misses       ,    446917742 
-bus-cycles          ,   1638800271 
-cpu-clock (msec)    , 16436.581004 
-task-clock (msec)   , 16436.525864 
-page-faults         ,          322 
-context-switches    ,         1667 
-cpu-migrations      ,            0 
-minor-faults        ,          322 
-major-faults        ,            0 
-alignment-faults    ,            0 
-emulation-faults    ,            0 
+EVENT,RESULTS
+cpu-cycles          , 42616406808
+instructions        , 62611223065
+cache-references    ,    14831671
+cache-misses        ,      232510
+branch-instructions , 15460011796
+branch-misses       ,   446703277
+bus-cycles          ,  1289553828
+cpu-clock (msec)    ,12925.385628
+task-clock (msec)   ,12925.348002
+page-faults         ,         322
+context-switches    ,        1301
+cpu-migrations      ,           4
+minor-faults        ,         322
+major-faults        ,           0
+alignment-faults    ,           0
+emulation-faults    ,           0
