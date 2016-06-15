@@ -1,0 +1,17 @@
+EVENTS,RESULTS
+cpu-cycles          ,  42601272991 
+instructions        ,  62618564925 
+cache-references    ,     13842293 
+cache-misses        ,       197836 
+branch-instructions ,  15461960075 
+branch-misses       ,    446917742 
+bus-cycles          ,   1638800271 
+cpu-clock (msec)    , 16436.581004 
+task-clock (msec)   , 16436.525864 
+page-faults         ,          322 
+context-switches    ,         1667 
+cpu-migrations      ,            0 
+minor-faults        ,          322 
+major-faults        ,            0 
+alignment-faults    ,            0 
+emulation-faults    ,            0 
