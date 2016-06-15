@@ -24,9 +24,9 @@ echo "Allocated computing node: $node_info" >> time_results_OMP/allocated_node_f
 echo "Executing in $node_info" >> time_results_OMP/allocated_node_for_execution.txt
 
 # Measuring OMP time with DATE command
-sample_size=10
+sample_size=5
 
-for num_threads in 2 4 8 16 32 34 36 64
+for num_threads in 1 2 4 8 16 32 34 36 64
 do 
 	export OMP_NUM_THREADS=$num_threads
 	for (( sample_num=1; sample_num <= $sample_size; ++sample_num ))
@@ -45,7 +45,7 @@ done
 ######  Organising files into CSV ######
 cd ~/AP_TP3_MD_Parallel/MD_OMP/time_results_OMP
 
-echo "NODE,MD_VERSION,SAMPLE_NUM,NTHREADS,WALLTIME(ms)" >> all_times_OMP.csv
+echo "NODE,MD_VERSION,SAMPLE_NUM,NTHREADS,WALLTIME(ms)" > all_times_OMP.csv
 
 NODE=$node_info
 MD_VERSION=OMP
