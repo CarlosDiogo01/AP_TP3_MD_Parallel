@@ -1,2 +1,0 @@
-Allocated computing node: compute-641-12
-Executing in compute-641-12
