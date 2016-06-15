@@ -1,7 +1,7 @@
 all: MD_SEQ
 
 MD_SEQ : *.c
-	gcc -O3 -o MD_SEQ MD.c Particle.c Random.c main.c -lm -Wall
+	gcc -O3 -ggdb -g -o MD_SEQ MD.c Particle.c Random.c main.c -lm -Wall
 
 .PHONY: clean
 
