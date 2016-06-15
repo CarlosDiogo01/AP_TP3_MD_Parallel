@@ -1,11 +1,11 @@
 all: MD_OMP
 
 MD_OMP : *.c
-	gcc -O3 -fopenmp -o MD_OMP MD.c Particle.c Random.c main.c -lm -Wall
+	mpicc -O3 -fopenmp -o MD_MPI MD.c Particle.c Random.c main.c -lm -Wall
 
 .PHONY: clean
 
 clean:
-	rm MD_OMP
-	rm MD_OMP.e*
-	rm MD_OMP.o*
+	rm MD_MPI
+	rm MD_MPI.e*
+	rm MD_MPI.o*

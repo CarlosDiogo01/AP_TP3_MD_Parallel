@@ -1,4 +1,4 @@
-#PBS -N MD_OMP
+#PBS -N MD_MPI
 #PBS -l walltime=01:00:00
 #PBS -q mei
 
@@ -10,18 +10,18 @@
 #PBS -l nodes=1:r641:ppn=32
 
 module purge
-module load gnu/4.9.0
+module load gnu/openmpi_eth/1.8.4
 
 # MD GIT repo should be cloned on HOME!
-cd ~/AP_TP3_MD_Parallel/MD_OMP
+cd ~/CPD/AP/TP3/AP_TP3_MD_Parallel/MD_MPI
 
-mkdir -p time_results_OMP
-mkdir -p time_results_OMP/output
+mkdir -p time_results_MPI
+mkdir -p time_results_MPI/output
 
 # Read and save ALLOCATED NODE INFO 
 read -r node_info<$PBS_NODEFILE
-echo "Allocated computing node: $node_info" >> time_results_OMP/allocated_node_for_execution.txt
-echo "Executing in $node_info" >> time_results_OMP/allocated_node_for_execution.txt
+echo "Allocated computing node: $node_info" >> time_results_MPI/allocated_node_for_execution.txt
+echo "Executing in $node_info" >> time_results_MPI/allocated_node_for_execution.txt
 
 # Measuring OMP time with DATE command
 sample_size=10
