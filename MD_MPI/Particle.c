@@ -89,7 +89,6 @@ void force(MD *md,Particles *particulas, int pos){
            force[1] *= leiNewton[1];
            leiNewton[2] = dist[2] * powDist[7];
            force[2] *= leiNewton[2];
-           #pragma omp critical 
            {
             third_newton_law(particulas,i, leiNewton);
             update_static_variables(powDist, md);
@@ -97,7 +96,6 @@ void force(MD *md,Particles *particulas, int pos){
         }
 
        }
-    #pragma omp critical
     {
      updateForce(particulas,force,pos);
     }

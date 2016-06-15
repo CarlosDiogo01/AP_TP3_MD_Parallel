@@ -1,0 +1,20 @@
+#PBS -N MD_SEQ
+#PBS -l walltime=01:00:00
+#PBS -q mei
+
+#PBS -m abe
+#PBS -M carlos.sa01@gmail.com
+#PBS -M filipecosta.90@gmai.com
+#PBS -M sergiocaldas.91@gmail.com
+
+#PBS -l nodes=1:r641:ppn=32
+
+module purge
+module load gnu/4.9.0
+
+
+# MD GIT repo should be cloned on HOME!
+cd ~/AP_TP3_MD_Parallel/MD_SEQ
+
+perf record -e cpu-cycles,instructions,cache-misses ./MD_SEQ
+

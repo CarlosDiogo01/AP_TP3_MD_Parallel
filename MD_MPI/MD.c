@@ -162,11 +162,11 @@ void cicleForces(MD *md,Particles *particulas){
     md->epot = md->vir = 0.0;
     
     //podemos fazer este cico em paralelo com OpenMP
-    #pragma omp parallel for
     for (i = 0; i < md->mdsize; i++){
         force(md,particulas,i);
     }
 }
+
 /* scale forces, update velocities */
 void cicleMkekin(MD *md, Particles *particulas) {
     int i;
