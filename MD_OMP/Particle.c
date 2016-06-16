@@ -5,8 +5,6 @@
 #include <stdlib.h>
 
 
-    
-
 // Fazer a movimentação das particulas
  void domove(double side, Particles *p, int pos){
         p->posX[pos] += p->vX[pos] + p->fX[pos];
@@ -76,18 +74,20 @@ void force(MD *md,Particles *particulas, int pos){
      int i;
      
      storePosition(posActPart,particulas,pos);
-     
+    
      for (i = pos + 1; i < md ->mdsize; i++) {
-
         powDist[0] = calculateDistance(dist,posActPart,particulas,i,sideh,md);
         if(powDist[0] <= rcoffs) 
         {
            calculePow(powDist);
-           leiNewton[0] = dist[0] * powDist[7];
+	   
+	   leiNewton[0] = dist[0] * powDist[7];
            force[0] *= leiNewton[0];
-           leiNewton[1] = dist[1] * powDist[7];
+           
+	   leiNewton[1] = dist[1] * powDist[7];
            force[1] *= leiNewton[1];
-           leiNewton[2] = dist[2] * powDist[7];
+           
+	   leiNewton[2] = dist[2] * powDist[7];
            force[2] *= leiNewton[2];
            #pragma omp critical 
            {
