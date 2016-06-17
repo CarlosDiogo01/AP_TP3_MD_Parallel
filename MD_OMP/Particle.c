@@ -26,13 +26,19 @@
 }
     
  void calculePow(double powDist[]){
-        powDist[1] = 1.0/powDist[0];
-        powDist[2] = powDist[1] * powDist[1];
-        powDist[3] = powDist[2] * powDist[1];
-        powDist[4] = powDist[2] * powDist[2];
-        powDist[6] = powDist[2] * powDist[4];
-        powDist[7] = powDist[6] * powDist[1];
-        powDist[8] = powDist[7] - 0.5 * powDist[4];
+        
+	powDist[1] = 1.0/powDist[0];
+        int aux1 = powDist[1];
+
+	powDist[2] = aux1 * aux1;
+        int aux2 = powDist[2];
+	powDist[3] = aux2 * aux1;
+        powDist[4] = aux2 * aux2;
+
+	int aux4 = powDist[4];
+        powDist[6] = aux2 * aux4;
+        powDist[7] = powDist[6] * aux1;
+        powDist[8] = powDist[7] - 0.5 * aux4;
  }
  
  void storePosition(double posActPart[],Particles *particulas, int pos){
@@ -72,6 +78,7 @@ void force(MD *md,Particles *particulas, int pos){
      double powDist[9];    // Guarda as potencias das distancias
      double leiNewton[3];
      int i;
+     int aux;
      
      storePosition(posActPart,particulas,pos);
     
@@ -80,14 +87,15 @@ void force(MD *md,Particles *particulas, int pos){
         if(powDist[0] <= rcoffs) 
         {
            calculePow(powDist);
+	   aux = powDist[7];
 	   
-	   leiNewton[0] = dist[0] * powDist[7];
+	   leiNewton[0] = dist[0] * aux;
            force[0] *= leiNewton[0];
            
-	   leiNewton[1] = dist[1] * powDist[7];
+	   leiNewton[1] = dist[1] * aux;
            force[1] *= leiNewton[1];
            
-	   leiNewton[2] = dist[2] * powDist[7];
+	   leiNewton[2] = dist[2] * aux;
            force[2] *= leiNewton[2];
            #pragma omp critical 
            {
