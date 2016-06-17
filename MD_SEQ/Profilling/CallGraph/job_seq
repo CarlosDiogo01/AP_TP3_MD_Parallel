@@ -1,0 +1,60 @@
+#PBS -N MD_SEQ
+#PBS -l walltime=01:00:00
+#PBS -q mei
+
+#PBS -m abe
+#PBS -M carlos.sa01@gmail.com
+#PBS -M filipecosta.90@gmai.com
+#PBS -M sergiocaldas.91@gmail.com
+
+#PBS -l nodes=1:r641:ppn=32
+
+module purge
+module load gnu/4.9.0
+
+
+# MD GIT repo should be cloned on HOME!
+cd ~/AP_TP3_MD_Parallel/MD_SEQ
+
+mkdir -p time_results_SEQ
+mkdir -p time_results_SEQ/output
+
+# Read and save ALLOCATED NODE INFO 
+read -r node_info<$PBS_NODEFILE
+echo "Allocated computing node: $node_info" >> time_results_SEQ/allocated_node_for_execution.txt
+echo "Executing in $node_info" >> time_results_SEQ/allocated_node_for_execution.txt
+
+# Measuring SEQ time with DATE command
+sample_size=5
+
+for (( sample_num=1; sample_num <= $sample_size; ++sample_num ))
+do
+	START=$(date +"%s%3N")
+		./MD_SEQ >> "time_results_SEQ/output/output_SEQ_sample_"$sample_num".txt"
+	END=$(date +"%s%3N")
+	
+	DIFF=$(($END-$START))
+	echo "$DIFF" >> "time_results_SEQ/time_SEQ_sample_"$sample_num".txt"
+	
+done
+
+
+######  Organising files into CSV ######
+cd ~/AP_TP3_MD_Parallel/MD_SEQ/time_results_SEQ
+
+echo "NODE,MD_VERSION,SAMPLE_NUM,NTHREADS,WALLTIME(ms)" > all_times_SEQ.csv
+
+NODE=$node_info
+MD_VERSION=SEQ
+NTHREADS=1
+
+for ficheiro in time_SEQ_sample*
+do
+        walltime=`cat $ficheiro | egrep -o '[0-9]*'`
+	sample_num=`echo $ficheiro | awk -F'[_.]' '{print $4}'`
+
+        echo $NODE,$MD_VERSION,$sample_num,$NTHREADS,$walltime >> all_times_SEQ.csv
+done
+
+#Sorting WALLTIME(ms) column of CSV
+sort -t, -nk5 -o all_times_SEQ.csv all_times_SEQ.csv
