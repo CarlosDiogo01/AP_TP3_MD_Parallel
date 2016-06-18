@@ -1,16 +1,17 @@
-cpu-cycles          , 112260060502
-instructions        , 58468678542
-cache-references    , 638641542
-cache-misses        , 199256416
-branch-instructions , 13077784649
-branch-misses       , 398913129
-bus-cycles          , 4327464808
-cpu-clock (msec)    , 63178309178
-task-clock (msec)   , 63171559195
-page-faults         , 472
-context-switches    , 9438
-cpu-migrations      , 28
-minor-faults        , 489
-major-faults        , 1
-alignment-faults    , 0
-emulation-faults    , 0
+Events,Before,After
+cpu-cycles          , 112260060502,608364313341
+instructions        , 58468678542,182629697975
+cache-references    , 638641542,2255454391
+cache-misses        , 199256416,186901697
+branch-instructions , 13077784649,53899088263
+branch-misses       , 398913129,555741281
+bus-cycles          , 4327464808,23515983755
+cpu-clock (msec)    , 63178309178,410610571159
+task-clock (msec)   , 63171559195,410592071213
+page-faults         , 472,528
+context-switches    , 9438,667987
+cpu-migrations      , 28,14231
+minor-faults        , 489,608
+major-faults        , 1,0
+alignment-faults    , 0,0
+emulation-faults    , 0,0
