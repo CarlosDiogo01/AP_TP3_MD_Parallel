@@ -7,5 +7,3 @@ MD_OMP : *.c
 
 clean:
 	rm MD_OMP
-	rm MD_OMP.e*
-	rm MD_OMP.o*

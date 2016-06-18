@@ -161,7 +161,7 @@ void cicleForces(MD *md,Particles *particulas){
     int i;
     md->epot = md->vir = 0.0;
     
-    //podemos fazer este cico em paralelo com OpenMP
+    //podemos fazer este ciclo em paralelo com OpenMP
     for (i = 0; i < md->mdsize; i++){
         force(md,particulas,i);
     }

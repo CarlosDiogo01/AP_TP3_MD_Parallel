@@ -1,7 +1,7 @@
-all: MD_OMP
+all: MD_MPI
 
-MD_OMP : *.c
-	mpicc -O3 -fopenmp -o MD_MPI MD.c Particle.c Random.c main.c -lm -Wall
+MD_MPI : *.c
+	mpicc -O3 -o MD_MPI MD.c Particle.c Random.c main.c -lm -Wall
 
 .PHONY: clean
 

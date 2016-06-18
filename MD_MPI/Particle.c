@@ -89,16 +89,13 @@ void force(MD *md,Particles *particulas, int pos){
            force[1] *= leiNewton[1];
            leiNewton[2] = dist[2] * powDist[7];
            force[2] *= leiNewton[2];
-           {
-            third_newton_law(particulas,i, leiNewton);
-            update_static_variables(powDist, md);
-           }
+            
+	  	third_newton_law(particulas,i, leiNewton);
+          	update_static_variables(powDist, md);
         }
 
        }
-    {
-     updateForce(particulas,force,pos);
-    }
+     		updateForce(particulas,force,pos);
 }
 
 

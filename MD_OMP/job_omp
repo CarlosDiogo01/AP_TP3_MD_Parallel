@@ -26,7 +26,7 @@ echo "Executing in $node_info" >> time_results_OMP/allocated_node_for_execution.
 # Measuring OMP time with DATE command
 sample_size=5
 
-for num_threads in 1 2 4 8 16 32 34 36 64
+for num_threads in 8 16 32 34 36 64 128 256 512 1024 2048 4096 8192 16384
 do 
 	export OMP_NUM_THREADS=$num_threads
 	for (( sample_num=1; sample_num <= $sample_size; ++sample_num ))

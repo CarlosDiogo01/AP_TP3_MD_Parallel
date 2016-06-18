@@ -152,16 +152,19 @@ void initialiseParticles(MD *md,Particles *particulas){
 /* move the particles and update velocities */
 void cicleDoMove(MD *md, Particles *particulas){
     int i;
-    for (i = 0; i < md->mdsize; i++)
+    //#pragma omp parallel for
+    //sem ganhos
+    for (i = 0; i < md->mdsize; i++) {
         domove(md->side,particulas,i);
+    }
 }
 
 /* compute forces */
 void cicleForces(MD *md,Particles *particulas){
     int i;
     md->epot = md->vir = 0.0;
-    
     //podemos fazer este cico em paralelo com OpenMP
+    //com ganhos
     #pragma omp parallel for
     for (i = 0; i < md->mdsize; i++){
         force(md,particulas,i);
@@ -171,9 +174,16 @@ void cicleForces(MD *md,Particles *particulas){
 void cicleMkekin(MD *md, Particles *particulas) {
     int i;
     double sum = 0.0;
-    for (i = 0; i < md->mdsize; i++)
+
+    //#pragma omp parallel for shared(sum)
+    //sem ganhos
+    for (i = 0; i < md->mdsize; i++) {
         mkekin(md->hsq2,particulas,i,&sum);
-    md->sum = sum;
+    }
+    //#pragma omp critical
+    //{
+    	md->sum = sum;
+    //}
 }
 
 /* average velocity */

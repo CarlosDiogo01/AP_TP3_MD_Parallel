@@ -1,64 +1,76 @@
-## FICHEIRO MODELO PBS CRIADO PARA A DISCIPLINA DE CPD::PCP
-## GRUPO : FILIPE OLIVEIRA E SERGIO CALDAS
-## DEZ/2015
-
-#!/bin/sh
-
-#          Remarks: A line beginning with # is a comment.
-#          A line beginning with #PBS is a PBS directive.
-#          PBS directives must come first; any directives
-#          after the first executable statement are ignored.
-
-#PBS -N pcp_tp2_2nodes_eth_extra
-#PBS -l walltime=00:60:00
+#PBS -N MD_MPI_GNU_641_ETH
+#PBS -l walltime=01:00:00
 #PBS -q mei
 
-#          PBS can send informative email messages to you about the
-#          status of your job.  Specify a string which consists of
-#          either the single character "n" (no mail), or one or more
-#          of the characters "a" (send mail when job is aborted),
-#          "b" (send mail when job begins), and "e" (send mail when
-#          job terminates).  The default is "a" if not specified.
-#          You should also specify the email address to which the
-#          message should be send via the -M option.
-
 #PBS -m abe
-#PBS -M a57816@alunos.uminho.pt
-#PBS -M a57779@alunos.uminho.pt
-#PBS -M a59905@alunos.uminho.pt
+#PBS -M carlos.sa01@gmail.com
+#PBS -M filipecosta.90@gmai.com
+#PBS -M sergiocaldas.91@gmail.com
 
-#          Specify the number of nodes requested and the
-#          number of processors per node. 
+#PBS -l nodes=4:r641:ppn=32
 
-#PBS -l nodes=2:r641:ppn=32
-
-cd AP_TP3_MD_Parallel/MD_MPI/
 module purge
-
 module load gnu/4.9.0
 module load gnu/4.9.3
 module load gnu/openmpi_eth/1.8.4
 ompi_info --param mpi all
 
+# MD GIT repo should be cloned on HOME!
+cd ~/AP_TP3_MD_Parallel/MD_MPI
+
+mkdir -p time_results_MPI
+mkdir -p time_results_MPI/output
+mkdir -p time_results_MPI/results_4Nodes
+
+# Read and save ALLOCATED NODE INFO 
 read -r node_info<$PBS_NODEFILE
+echo "Allocated computing node: $node_info" >> time_results_MPI/allocated_node_for_execution.txt
+echo "Executing in $node_info" >> time_results_MPI/allocated_node_for_execution.txt
+echo "Eth Network" >> allocated_node_for_execution.txt
 
-echo "Allocated computing node: $node_info"
 
-max_ppn=64
+# Measuring MPI time with DATE command
+max_ppn=128
 sample_size=5
-max_matrix=8196
 
-for (( matrix_size=8196;matrix_size <= $max_matrix; matrix_size+=matrix_size  ))
-do 
-for (( ppn = 1; ppn <= max_ppn; ++ppn )) 
+for (( ppn=97; ppn <= max_ppn; ++ppn ))
 do
-echo "Running $sample_size * ppn: $ppn nodes"
-for (( seq_num=1; seq_num <= $sample_size; ++seq_num ))
+	for (( sample_num=1; sample_num <= $sample_size; ++sample_num ))
+	do
+		START=$(date +"%s%3N")
+			mpirun -np $ppn --map-by core -mca btl self,sm,tcp --report-bindings ./MD_MPI "mapped-by-core_4" "eth" "4NODES" >> "time_results_MPI/output/output_MPI_sample_"$sample_num"_ppn_"$ppn".txt"
+		END=$(date +"%s%3N")
+
+		DIFF=$(($END-$START))
+		
+		echo "$DIFF" >> "time_results_MPI/time_MPI_sample_"$sample_num"_ppn_"$ppn".txt"	
+
+		sleep 3
+	done
+done
+
+
+cd ~/AP_TP3_MD_Parallel/MD_MPI/time_results_MPI/
+mv time_MPI_sample_* results_4Nodes/
+
+######  Organising files into CSV ######
+cd ~/AP_TP3_MD_Parallel/MD_MPI/time_results_MPI/results_4Nodes/
+
+echo "NODE,MD_VERSION,NNODES,MAPPED-BY,SAMPLE_NUM,PPN,WALLTIME(ms)" >> all_times_MPI.csv
+
+NODE=$node_info
+MD_VERSION=MPI
+MAPPED_BY=core
+NNODES=4
+
+for file in time_MPI_sample_*
 do
-mpirun -np $ppn --map-by core -mca btl self,sm,tcp --report-bindings MD_MPI 
-done
-done
+        ppn=`echo $file | awk -F'[_.]' '{print $6}'`
+	sample_num=`echo $file | awk -F'[_.]' '{print $4}'`
+	walltime=`cat $file | egrep -o '[0-9]*'`
+
+        echo $NODE,$MD_VERSION,$NNODES,$MAPPED_BY,$sample_num,$ppn,$walltime >> all_times_MPI.csv
 done
 
-echo "Done..."
-
+#Sorting by Number of Processes column of CSV
+sort -t, -nk6 -o all_times_MPI.csv all_times_MPI.csv
