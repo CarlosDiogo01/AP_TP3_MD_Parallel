@@ -1,0 +1,8 @@
+
+To use this example follow the steps below.
+1. Install gengraph if not installed
+2. Open a terminal and change directory to this example directory
+3. Type following command
+	gengraph -o graph -t png *.c
+	
+(NOTE : try out various image formats as well.)

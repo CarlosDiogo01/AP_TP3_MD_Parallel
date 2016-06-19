@@ -1,0 +1,124 @@
+#!/usr/bin/env bash
+
+#	gengraph - Generates static function call graph for C source code
+#	Copyright (C) 2015 Jaydeep Dhrangdhariya <jaydeep.gajjar90@gmail.com>
+#	
+#	This program is free software; you can redistribute it and/or
+#	modify it under the terms of the GNU General Public License
+#	as published by the Free Software Foundation; either version 2
+#	of the License, or (at your option) any later version.
+#	
+#	This program is distributed in the hope that it will be useful,
+#	but WITHOUT ANY WARRANTY; without even the implied warranty of
+#	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#	GNU General Public License for more details.
+#	
+#	You should have received a copy of the GNU General Public License
+#	along with this program; if not, write to the Free Software
+#	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+#
+
+PROGRAM_NAME=gengraph
+CC=gcc
+CC_TOOL=$CROSS_COMPILE$CC
+
+check_for_shell() {
+	if [ "$BASH" != "/bin/bash" ]; then
+		echo
+		echo "Script is not running with bash shell. Aborting !!!"
+		echo
+		exit
+	fi
+}
+
+print_usage() {
+	echo
+	echo -e "\
+    [USAGE] : $PROGRAM_NAME <CROSS_COMPILE=arm-linux-> [-o output_file_name] [-t image_type]
+	file1 file2  ... fileN
+
+	CROSS_COMPILE variable can be used to set prefix before default compiler '$CC'.
+
+	if -t flag and image_type both are ommited then, .png will be
+	default output format.
+	To know types that are supported, type
+		$PROGRAM_NAME -s"
+	echo
+	exit -1
+}
+
+print_file_types() {
+	echo -e "Use png, jpg, ps, pdf or svg as file type."; echo
+	exit -1
+}
+
+generate_graph() {
+	echo ""
+	# iterate over all supplied files
+	for file in $@
+	do
+		find $file > /dev/null 2>&1
+		if [ $? -eq 0 ]; then
+			# Create rtl dump for current file
+			$CC_TOOL -fdump-rtl-expand $file -o $file.TempOutput > /dev/null 2>&1
+			find $file.*.expand > /dev/null 2>&1
+			if [ $? -eq 0 ]; then
+				# The rtl dump is generated, so merge it to final dump
+				cat $file.*.expand >> gengraph_temp.expand
+				# Remove generated temprary files
+				rm -rf $file.*.expand
+				rm -rf $file.TempOutput
+			else
+				echo "[ERROR]   : Can not generate graph."
+				echo "            (error during processing $file)"
+				echo
+				exit -1
+			fi
+		else
+			echo "[ERROR]   : Can not find file - $file"
+			echo
+			exit -1
+		fi
+	done
+	egypt gengraph_temp.expand | dot -T$image_type -o $output_file_name.$image_type
+	rm -rf gengraph_temp.expand
+	echo "[SUCCESS] : Generated graph."; echo
+}
+
+# check shell
+check_for_shell
+
+# Check for the arguments
+if [ $# -eq 0 ]; then
+	# There is no file supplied, so inform the user and exit
+	print_usage
+	
+elif [[ $# -eq 1 ]]; then
+	# If only one argument is passed
+	if [ $1 == "-s" ]; then
+		print_file_types
+	else
+		print_usage
+	fi
+	
+elif [ $# -ge 3 ]; then
+	# If three or more arguments are passed
+	output_file_name=$2
+	passed_args=3
+	if [[ $# -ge 5 && $3 == "-t" ]]; then
+		if [[ $4 == "png" || $4 == "jpg" || $4 == "ps" || $4 == "pdf" || $4 == "svg" ]]; then
+			# Image type is also supplied
+			image_type=$4
+			passed_args=5
+		else
+			echo "Unsupported image output type."
+			print_file_types
+		fi
+	else
+		# No image type is supplied, so take png as default
+		image_type=png
+	fi
+	generate_graph ${@:passed_args}
+else
+	print_usage
+fi
