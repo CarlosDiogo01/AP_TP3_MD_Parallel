@@ -1,2 +1,4 @@
 Side:21.946755 RaiodeCorte: 3.250000
 Validado
+Side:21.946755 RaiodeCorte: 3.250000
+Validado
