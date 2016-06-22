@@ -33,7 +33,7 @@ echo "Eth Network" >> allocated_node_for_execution.txt
 max_ppn=128
 sample_size=5
 
-for (( ppn=97; ppn <= max_ppn; ++ppn ))
+for ppn in 1 2 4 8 10 12 14 16 22 24 26 28 30 32 34 36 38 64 128
 do
 	for (( sample_num=1; sample_num <= $sample_size; ++sample_num ))
 	do

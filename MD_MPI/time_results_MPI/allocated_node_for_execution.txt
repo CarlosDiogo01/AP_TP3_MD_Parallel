@@ -1,0 +1,4 @@
+Allocated computing node: compute-641-3
+Executing in compute-641-3
+Allocated computing node: compute-641-10
+Executing in compute-641-10
