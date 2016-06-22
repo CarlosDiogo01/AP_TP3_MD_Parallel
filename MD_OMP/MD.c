@@ -6,7 +6,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <omp.h>
-
+#include "timer.h"
 
 // Inicializar o MD
 void initialiseMD (MD *md,int size, int datasizes[]){
@@ -228,15 +228,25 @@ void get_full_potential_energy(MD *md){
 
 void runiters(MD *md, Particles *particulas){
     
-    printf("Side:%f RaiodeCorte: %f\n",md->side,md->rcoff);
+    //printf("Side:%f RaiodeCorte: %f\n",md->side,md->rcoff);
+    double start, finish, elapsed;
 
     for (md->move = 0; md->move < md->movemx; md->move++) {
 	    
         cicleDoMove              (md,particulas);  // Calcular o movimento
-        cicleForces              (md,particulas);  // Calcular a força
-        cicleMkekin              (md,particulas);  // Scale forces, update velocities
+
+	/* Measuring time */ 
+        GET_TIME(start);
+		cicleForces              (md,particulas);  // Calcular a força
+	GET_TIME(finish);	
+	elapsed = finish - start;
+        
+	cicleMkekin              (md,particulas);  // Scale forces, update velocities
         cicleVelavg              (md,particulas);  // calcular a velocidade
         scale_temperature        (md,particulas);  // temperature scale if required
         get_full_potential_energy(md);             // sum to get full potential energy and virial
     }
+   
+   /* Printf results */
+   printf("%f\n",elapsed);
 }

@@ -15,7 +15,7 @@
 	    {
 	      printf("Validation failed");
 	      printf("Kinetic Energy = %f %f %d",md.ek,dev,md.size);
-	    }else printf("Validado\n");
+	    }else /*printf("Validado\n");*/
 	}else printf("Tamanho nao reconhecido"); 
   }
 
@@ -31,7 +31,6 @@ int main(int argc, char  *argv[]){
     createParticules(&particulas,md.mdsize);    // Criar Particulas
     initialiseParticles(&md,&particulas);       // Inicializar as particulas 
     runiters(&md,&particulas);                   // Run the algorithm
-    
     JGFvalidate(md);                            // Validate the values obtained
     
     return 0;   
