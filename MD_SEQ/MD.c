@@ -215,7 +215,7 @@ void get_full_potential_energy(MD *md){
 
 void runiters(MD *md, Particles *particulas){
     
-    printf("Side:%f RaiodeCorte: %f\n",md->side,md->rcoff);
+    //printf("Side:%f RaiodeCorte: %f\n",md->side,md->rcoff);
     
     for (md->move = 0; md->move < md->movemx; md->move++) {
 	    
