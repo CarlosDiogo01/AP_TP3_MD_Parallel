@@ -39,7 +39,7 @@ done
 ######  Organising files into CSV ######
 cd ~/AP_TP3_MD_Parallel/MD_OMP/time_results_OMP
 
-echo "NODE,MD_VERSION,SAMPLE_NUM,NTHREADS,WALLTIME(sec)" > all_times_OMP.csv
+echo "NODE,MD_VERSION,SAMPLE_NUM,NTHREADS,TIME(sec)" > all_times_OMP.csv
 
 NODE=$node_info
 MD_VERSION=OMP
@@ -48,10 +48,10 @@ for file in time_OMP_nthreads*
 do
         NTHREADS=`echo $file | awk -F'[_.]' '{print $4}'`
 	sample_num=`echo $file | awk -F'[_.]' '{print $6}'`
-	walltime=`cat $file | egrep -o '[0-9.]+'`
+	time=`cat $file | egrep -o '[0-9.]+'`
 
-        echo $NODE,$MD_VERSION,$sample_num,$NTHREADS,$walltime >> all_times_OMP.csv
+        echo $NODE,$MD_VERSION,$sample_num,$NTHREADS,$time >> all_times_OMP.csv
 done
 
 #Sorting Number of Threads column of CSV
-sort -t, -nk4 -o all_times_OMP.csv all_times_OMP.csv
+sort -t, -nk4 -o all_times_OMP.csv all_times_MP.csv

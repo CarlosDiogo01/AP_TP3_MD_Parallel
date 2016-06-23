@@ -35,7 +35,7 @@ done
 ######  Organising files into CSV ######
 cd ~/AP_TP3_MD_Parallel/MD_SEQ/time_results_SEQ
 
-echo "NODE,MD_VERSION,SAMPLE_NUM,NTHREADS,WALLTIME(ms)" > all_times_SEQ.csv
+echo "NODE,MD_VERSION,SAMPLE_NUM,NTHREADS,TIME(sec)" > all_times_SEQ.csv
 
 NODE=$node_info
 MD_VERSION=SEQ
@@ -43,10 +43,10 @@ NTHREADS=1
 
 for ficheiro in time_SEQ_sample*
 do
-        walltime=`cat $ficheiro | egrep -o '[0-9.]+'`
+        time=`cat $ficheiro | egrep -o '[0-9.]+'`
 	sample_num=`echo $ficheiro | awk -F'[_.]' '{print $4}'`
 
-        echo $NODE,$MD_VERSION,$sample_num,$NTHREADS,$walltime >> all_times_SEQ.csv
+        echo $NODE,$MD_VERSION,$sample_num,$NTHREADS,$time >> all_times_SEQ.csv
 done
 
 #Sorting WALLTIME(sec) column of CSV

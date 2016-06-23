@@ -45,7 +45,7 @@ done
 ######  Organising files into CSV ######
 cd ~/AP_TP3_MD_Parallel/MD_MPI/time_results_MPI_eth/results_4Nodes/
 
-echo "NODE,MD_VERSION,NNODES,MAPPED-BY,SAMPLE_NUM,PPN,WALLTIME(ms)" >> all_times_MPI_eth.csv
+echo "NODE,MD_VERSION,NNODES,MAPPED-BY,SAMPLE_NUM,PPN,TIME(sec)" >> all_times_MPI_eth.csv
 
 NODE=$node_info
 MD_VERSION=MPI_ETH
@@ -56,9 +56,9 @@ for file in time_MPI_sample_*
 do
         ppn=`echo $file | awk -F'[_.]' '{print $6}'`
 	sample_num=`echo $file | awk -F'[_.]' '{print $4}'`
-	walltime=`cat $file | egrep -o '[0-9.]+' | head -1`
+	time=`cat $file | egrep -o '[0-9.]+' | head -1`
 
-        echo $NODE,$MD_VERSION,$NNODES,$MAPPED_BY,$sample_num,$ppn,$walltime >> all_times_MPI_eth.csv
+        echo $NODE,$MD_VERSION,$NNODES,$MAPPED_BY,$sample_num,$ppn,$time >> all_times_MPI_eth.csv
 done
 
 #Sorting by Number of Processes column of CSV

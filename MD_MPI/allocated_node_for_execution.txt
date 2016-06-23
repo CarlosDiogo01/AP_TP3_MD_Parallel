@@ -1,2 +1,0 @@
-Eth Network
-Myrinet Network
