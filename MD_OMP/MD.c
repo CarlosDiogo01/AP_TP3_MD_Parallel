@@ -229,8 +229,6 @@ void get_full_potential_energy(MD *md){
 void runiters(MD *md, Particles *particulas){
     
     //printf("Side:%f RaiodeCorte: %f\n",md->side,md->rcoff);
-    double start, finish, elapsed;
-
     for (md->move = 0; md->move < md->movemx; md->move++) {
 	    
         cicleDoMove              (md,particulas);  // Calcular o movimento
