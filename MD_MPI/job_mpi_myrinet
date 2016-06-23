@@ -19,7 +19,6 @@ ompi_info --param mpi all
 cd ~/AP_TP3_MD_Parallel/MD_MPI
 
 mkdir -p time_results_MPI_myr
-mkdir -p time_results_MPI_myr/output
 mkdir -p time_results_MPI_myr/results_4Nodes
 
 # Read and save ALLOCATED NODE INFO 
@@ -33,25 +32,15 @@ echo "Myrinet Network" >> allocated_node_for_execution.txt
 max_ppn=128
 sample_size=5
 
-for ppn in 1 2 4 8 10 12 14 16 22 24 26 28 30 32 34 36 38 64 128
+for ppn in 1 2 4 8 10 12 14 16 22 24 26 28 30 32 34 36 38 64 96 128
 do
 	for (( sample_num=1; sample_num <= $sample_size; ++sample_num ))
 	do
-		START=$(date +"%s%3N")
-			mpirun -np $ppn --hostfile hosts_file_641 --report-bindings --mca mtl mx --mca pml cm ./MD_MPI "mapped-by-core_4" "myr" "4NODES" >> "time_results_MPI_myr/output/output_MPI_sample_"$sample_num"_ppn_"$ppn".txt"
-		END=$(date +"%s%3N")
-
-		DIFF=$(($END-$START))
-		
-		echo "$DIFF" >> "time_results_MPI_myr/time_MPI_sample_"$sample_num"_ppn_"$ppn".txt"	
-
+		mpirun -np $ppn --hostfile hosts_file_641 --report-bindings --mca mtl mx --mca pml cm ./MD_MPI "mapped-by-core_4" "myr" "4NODES" >> "time_results_MPI_myr/results_4Nodes/time_MPI_sample_"$sample_num"_ppn_"$ppn".txt"
 		sleep 3
 	done
 done
 
-
-cd ~/AP_TP3_MD_Parallel/MD_MPI/time_results_MPI_myr/
-mv time_MPI_sample_* results_4Nodes/
 
 ######  Organising files into CSV ######
 cd ~/AP_TP3_MD_Parallel/MD_MPI/time_results_MPI_myr/results_4Nodes/
@@ -59,7 +48,7 @@ cd ~/AP_TP3_MD_Parallel/MD_MPI/time_results_MPI_myr/results_4Nodes/
 echo "NODE,MD_VERSION,NNODES,MAPPED-BY,SAMPLE_NUM,PPN,WALLTIME(ms)" >> all_times_MPI_myr.csv
 
 NODE=$node_info
-MD_VERSION=MPI
+MD_VERSION=MPI_MYR
 MAPPED_BY=core
 NNODES=4
 
@@ -67,9 +56,9 @@ for file in time_MPI_sample_*
 do
         ppn=`echo $file | awk -F'[_.]' '{print $6}'`
 	sample_num=`echo $file | awk -F'[_.]' '{print $4}'`
-	walltime=`cat $file | egrep -o '[0-9]*'`
+	walltime=`cat $file | egrep -o '[0-9.]+' | head -1`
 
-        echo $NODE,$MD_VERSION,$NNODES,$MAPPED_BY,$sample_num,$ppn,$walltime >> all_times_MPI.csv
+        echo $NODE,$MD_VERSION,$NNODES,$MAPPED_BY,$sample_num,$ppn,$walltime >> all_times_MPI_myr.csv
 done
 
 #Sorting by Number of Processes column of CSV

@@ -6,7 +6,7 @@
 #include "Particle.h"
 #include "MD.h"
 #include "main.h"
-
+#include "timer.h"
  void JGFvalidate(MD md){
 	if(md.size<2){
 	    double refval[]={1731.4306625334357, 7397.392307839352};
@@ -15,7 +15,7 @@
 	    {
 	      printf("Validation failed");
 	      printf("Kinetic Energy = %f %f %d",md.ek,dev,md.size);
-	    }else /*printf("Validado\n");*/
+	    } /* else printf("Validado\n"); */
 	}else printf("Tamanho nao reconhecido"); 
   }
 
@@ -35,4 +35,3 @@ int main(int argc, char  *argv[]){
     
     return 0;   
 }
-

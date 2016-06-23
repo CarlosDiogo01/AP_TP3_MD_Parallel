@@ -10,14 +10,12 @@
 #PBS -l nodes=1:r641:ppn=32
 
 module purge
-module load intel/2013.1.117
-
+module load gnu/4.9.0
 
 # MD GIT repo should be cloned on HOME!
 cd ~/AP_TP3_MD_Parallel/MD_SEQ
 
 mkdir -p time_results_SEQ
-mkdir -p time_results_SEQ/output
 
 # Read and save ALLOCATED NODE INFO 
 read -r node_info<$PBS_NODEFILE
@@ -29,12 +27,7 @@ sample_size=5
 
 for (( sample_num=1; sample_num <= $sample_size; ++sample_num ))
 do
-	START=$(date +"%s%3N")
-		./MD_SEQ >> "time_results_SEQ/output/output_SEQ_sample_"$sample_num".txt"
-	END=$(date +"%s%3N")
-	
-	DIFF=$(($END-$START))
-	echo "$DIFF" >> "time_results_SEQ/time_SEQ_sample_"$sample_num".txt"
+	./MD_SEQ >> "time_results_SEQ/time_SEQ_sample_"$sample_num".txt"
 	
 done
 
@@ -50,11 +43,11 @@ NTHREADS=1
 
 for ficheiro in time_SEQ_sample*
 do
-        walltime=`cat $ficheiro | egrep -o '[0-9]*'`
+        walltime=`cat $ficheiro | egrep -o '[0-9.]+'`
 	sample_num=`echo $ficheiro | awk -F'[_.]' '{print $4}'`
 
         echo $NODE,$MD_VERSION,$sample_num,$NTHREADS,$walltime >> all_times_SEQ.csv
 done
 
-#Sorting WALLTIME(ms) column of CSV
+#Sorting WALLTIME(sec) column of CSV
 sort -t, -nk5 -o all_times_SEQ.csv all_times_SEQ.csv

@@ -32,12 +32,13 @@ int main(int argc, char  *argv[]){
   initialiseMD(&md,size,datasizes);           // Inicializar a estrutura MD
   createParticules(&particulas,md.mdsize);    // Criar Particulas
   initialiseParticles(&md,&particulas);       // Inicializar as particulas 
+  
   GET_TIME(start);
-  runiters(&md,&particulas);                   // Run the algorithm
+  	runiters(&md,&particulas);                   // Run the algorithm
   GET_TIME(end);
   elapsed = end - start;
   printf( "%f\n", elapsed );
-  //  JGFvalidate(md);                            // Validate the values obtained
+  //  JGFvalidate(md);                            // Validate the values obtaine
 
   return 0;   
 }

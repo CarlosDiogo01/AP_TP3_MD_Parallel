@@ -234,19 +234,11 @@ void runiters(MD *md, Particles *particulas){
     for (md->move = 0; md->move < md->movemx; md->move++) {
 	    
         cicleDoMove              (md,particulas);  // Calcular o movimento
-
-	/* Measuring time */ 
-        GET_TIME(start);
-		cicleForces              (md,particulas);  // Calcular a força
-	GET_TIME(finish);	
-	elapsed = finish - start;
-        
+	cicleForces              (md,particulas);  // Calcular a força
 	cicleMkekin              (md,particulas);  // Scale forces, update velocities
         cicleVelavg              (md,particulas);  // calcular a velocidade
         scale_temperature        (md,particulas);  // temperature scale if required
         get_full_potential_energy(md);             // sum to get full potential energy and virial
     }
    
-   /* Printf results */
-   printf("%f\n",elapsed);
 }
