@@ -1,0 +1,17 @@
+EVENT,BEFORE,AFTER
+cpu-cycles          , 48112415669,49964427783
+instructions        , 54766818647,55253855985
+cache-references    , 154343990,172268394
+cache-misses        , 1025344,1125674
+branch-instructions , 13522682867,13554015009
+branch-misses       , 362007468,442294817
+bus-cycles          , 1480849153,1537959540
+cpu-clock (msec)    , 107844,112361
+task-clock (msec)   , 107820,112356
+page-faults         , 941,351
+context-switches    , 3035,12386
+cpu-migrations      , 3,1
+minor-faults        , 780,452
+major-faults        , 0,0
+alignment-faults    , 0,0
+emulation-faults    , 0,0
