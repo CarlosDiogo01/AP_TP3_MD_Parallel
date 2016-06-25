@@ -32,12 +32,18 @@ int main(int argc, char  *argv[]){
   initialiseMD(&md,size,datasizes);           // Inicializar a estrutura MD
   createParticules(&particulas,md.mdsize);    // Criar Particulas
   initialiseParticles(&md,&particulas);       // Inicializar as particulas 
-  
+
   GET_TIME(start);
-  	runiters(&md,&particulas);                   // Run the algorithm
+  runiters(&md,&particulas);                   // Run the algorithm
   GET_TIME(end);
   elapsed = end - start;
-  printf( "%f\n", elapsed );
+
+  int rank, size;
+  MPI_Comm_rank (MPI_COMM_WORLD, &rank);	/* get current process id */
+  MPI_Comm_size (MPI_COMM_WORLD, &size);	/* get number of processes */
+  if (rank == 0){
+    printf( "%f\n", elapsed );
+  }
   //  JGFvalidate(md);                            // Validate the values obtaine
 
   return 0;   
