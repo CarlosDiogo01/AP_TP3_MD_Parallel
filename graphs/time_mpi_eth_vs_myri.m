@@ -36,29 +36,20 @@ times_myri_1(K) = csvread( strcat( strcat('../MD_MPI/time_myri/1/best_', num2str
 times_myri_3(K) = csvread( strcat( strcat('../MD_MPI/time_myri/3/best_', num2str(myri_ppn(K) )), '.csv'));
 end
 
-base_time_eth_1 = times_eth_1(1);
-base_time_eth_3 = times_eth_3(1);
-base_time_myri_1 = times_myri_1(1);
-base_time_myri_3 = times_myri_3(1);
 
-gain_eth_1 =  base_time_eth_1 ./ times_eth_1;
-gain_eth_3 =  base_time_eth_3 ./ times_eth_3;
-
-gain_myri_1 =  base_time_myri_1 ./ times_myri_1;
-gain_myri_3 = base_time_myri_3 ./ times_myri_3;
 
 
 bg = [1 1 1; 0 0 0];
 cores = distinguishable_colors(100,bg);
 
 
-plot(eth_ppn,gain_eth_1,'r+--','Color', cores(1,:),'MarkerSize', 8);
+plot(eth_ppn,times_eth_1,'r+--','Color', cores(1,:),'MarkerSize', 8);
 hold on;
-plot(eth_ppn,gain_eth_3,'r+--','Color', cores(2,:),'MarkerSize', 8);
+plot(eth_ppn,times_eth_3,'r+--','Color', cores(2,:),'MarkerSize', 8);
 hold on;
-plot(myri_ppn,	gain_myri_1,'ro--','Color', cores(3,:),'MarkerSize', 8);
+plot(myri_ppn,times_myri_1,'ro--','Color', cores(3,:),'MarkerSize', 8);
 hold on;
-plot(myri_ppn,gain_myri_3 ,'ro--','Color', cores(4,:),'MarkerSize', 8);
+plot(myri_ppn,times_myri_3,'ro--','Color', cores(4,:),'MarkerSize', 8);
 hold on;
 %%%%%
 
@@ -69,16 +60,18 @@ hold on;
  fig = figure(1);
  set(gcf,'PaperPositionMode','auto')
  set(fig, 'Position', [0 0 780 700])
+
  
 set(gca,'xscale','log');
 set(gca,'yscale','log');
+
 
 grid on;
 set(gca, 'XTick', [1 2 4 8 10 12 14 16 24 32 64 96 128]);
 set(gca, 'YTick', [1 2 4 8 16 32 64]);
 
 xlim([1 128]) ;
-%ylim([0 36]) ;
+ylim([0 96]) ;
 
 
 set(gca,'YTickLabel',num2str(get(gca,'YTick').'));
@@ -87,14 +80,14 @@ set(gca,'YTickLabel',num2str(get(gca,'YTick').'));
 l = legend('Gigabit Ethernet -- dataset 1', 'Gigabit Ethernet -- dataset 3', 'Myrinet 10Gbps -- dataset 1' , 'Myrinet 10Gbps -- dataset 3');
 
 set(l,'FontSize',12);
-ylabel('Gain');
+ylabel('Time (seconds)');
 
 xlabel('Number of OpenMPI Processes');
-t = title({'\textbf{Relation between total gain and number of OpenMPI processes}','Compute node 641, Dataset sizes 1 and 3, GCC version 4.9.3, OpenMPI version 1.8.4','MPI mapping by core, Max number of nodes: 4','Communication platforms: Gigabit Ethernet and Myrinet 10Gbps'},'interpreter','latex')
+t = title({'\textbf{Relation between total time for solution and number of OpenMPI processes}','Compute node 641, Dataset sizes 1 and 3, GCC version 4.9.3, OpenMPI version 1.8.4','MPI mapping by core, Max number of nodes: 4','Communication platforms: Gigabit Ethernet and Myrinet 10Gbps'},'interpreter','latex')
 set(gca,'fontsize',12);
 
 set(t,'FontSize',18);
 
-print('gain_mpi_eth_myri', '-depsc2', '-r300');
+print('time_mpi_eth_myri', '-depsc2', '-r300');
 
 
