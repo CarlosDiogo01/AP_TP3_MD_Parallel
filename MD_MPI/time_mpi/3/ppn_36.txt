@@ -1,0 +1,40 @@
+--------------------------------------------------------------------------
+There are not enough slots available in the system to satisfy the 36 slots 
+that were requested by the application:
+  ./MD_MPI
+
+Either request fewer slots for your application, or make more slots available
+for use.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+There are not enough slots available in the system to satisfy the 36 slots 
+that were requested by the application:
+  ./MD_MPI
+
+Either request fewer slots for your application, or make more slots available
+for use.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+There are not enough slots available in the system to satisfy the 36 slots 
+that were requested by the application:
+  ./MD_MPI
+
+Either request fewer slots for your application, or make more slots available
+for use.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+There are not enough slots available in the system to satisfy the 36 slots 
+that were requested by the application:
+  ./MD_MPI
+
+Either request fewer slots for your application, or make more slots available
+for use.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+There are not enough slots available in the system to satisfy the 36 slots 
+that were requested by the application:
+  ./MD_MPI
+
+Either request fewer slots for your application, or make more slots available
+for use.
+--------------------------------------------------------------------------

@@ -4,7 +4,7 @@
 
 #PBS -m abe
 #PBS -M carlos.sa01@gmail.com
-#PBS -M filipecosta.90@gmai.com
+#PBS -M filipecosta.90@gmail.com
 #PBS -M sergiocaldas.91@gmail.com
 
 #PBS -l nodes=4:r641:ppn=32
@@ -24,10 +24,10 @@ mkdir -p time_eth/3
 
 # Measuring MPI time with DATE command
 sample_size=5
-for dataset in 1 3
+for dataset in 1  3
 
 do
-for ppn in 1 2 4 8 # 10 12 14 16 22 24 26 28 30 32 34 36 38 64 96 128
+for ppn in 1 2 4  8  10 12 14 16 22 24 26 28 30 32 34 36 38 64 96 128
 do
 for (( sample_num=1; sample_num <= $sample_size; ++sample_num ))
 do

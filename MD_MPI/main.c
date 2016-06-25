@@ -38,15 +38,13 @@ MPI_Init(0,0);
   runiters(&md,&particulas);                   // Run the algorithm
   GET_TIME(end);
   elapsed = end - start;
-
   int rank;
   MPI_Comm_rank (MPI_COMM_WORLD, &rank);	/* get current process id */
   if (rank == 0){
-    printf( "%f\n", elapsed );
+  printf( "%f\n", elapsed );
   }
   MPI_Finalize();
   //  JGFvalidate(md);                            // Validate the values obtaine
-
   return 0;   
 }
 
