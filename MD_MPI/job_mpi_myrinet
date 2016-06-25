@@ -18,9 +18,9 @@ ompi_info --param mpi all
 # MD GIT repo should be cloned on HOME!
 cd ~/AP_TP3_MD_Parallel/MD_MPI
 
-mkdir -p time_mpi
-mkdir -p time_mpi/1
-mkdir -p time_mpi/3
+mkdir -p time_myri
+mkdir -p time_myri/1
+mkdir -p time_myri/3
 
 # Measuring MPI time with DATE command
 sample_size=5
