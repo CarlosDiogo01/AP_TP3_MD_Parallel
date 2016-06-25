@@ -224,7 +224,6 @@ void runiters(MD *md, Particles *particulas){
 
   //printf("Side:%f RaiodeCorte: %f\n",md->side,md->rcoff);
 
-  MPI_Init(0,0);
   for (md->move = 0; md->move < md->movemx; md->move++) {
     cicleDoMove              (md,particulas);  // Calcular o movimento
     cicleForces              (md,particulas);  // Calcular a força
@@ -239,5 +238,4 @@ void runiters(MD *md, Particles *particulas){
   MPI_Allreduce(MPI_IN_PLACE,&md->epot,1,MPI_DOUBLE,MPI_SUM,MPI_COMM_WORLD);
   MPI_Allreduce(MPI_IN_PLACE,&md->vir,1,MPI_DOUBLE,MPI_SUM,MPI_COMM_WORLD);
   MPI_Allreduce(MPI_IN_PLACE,&md->interactions,1,MPI_DOUBLE,MPI_SUM,MPI_COMM_WORLD);
-  MPI_Finalize();
 }

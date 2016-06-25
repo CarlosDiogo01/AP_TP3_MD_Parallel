@@ -33,7 +33,7 @@ int main(int argc, char  *argv[]){
   initialiseMD(&md,size,datasizes);           // Inicializar a estrutura MD
   createParticules(&particulas,md.mdsize);    // Criar Particulas
   initialiseParticles(&md,&particulas);       // Inicializar as particulas 
-
+MPI_Init(0,0);
   GET_TIME(start);
   runiters(&md,&particulas);                   // Run the algorithm
   GET_TIME(end);
@@ -44,6 +44,7 @@ int main(int argc, char  *argv[]){
   if (rank == 0){
     printf( "%f\n", elapsed );
   }
+  MPI_Finalize();
   //  JGFvalidate(md);                            // Validate the values obtaine
 
   return 0;   
