@@ -7,6 +7,7 @@
 #include "MD.h"
 #include "main.h"
 #include "timer.h"
+#include "mpi.h"
 
 void JGFvalidate(MD md){
   if(md.size<2){
