@@ -120,7 +120,7 @@ set(l,'FontSize',12);
 ylabel('Speedup');
 
 xlabel('Number of OpenMPI Processes');
-t = title({'\textbf{Relation between Experimental speedup and Theoretical Speedup}','Compute node 641, Dataset sizes 1 and 3, GCC version 4.9.3, OpenMPI version 1.8.4','MPI mapping by core, Max number of nodes: 4','Communication platforms: Gigabit Ethernet and Myrinet 10Gbps'},'interpreter','latex')
+t = title({'\textbf{Theoretical Speedup prediction}','Compute node 641, Dataset sizes 1 and 3, GCC version 4.9.3, OpenMPI version 1.8.4','MPI mapping by core, Max number of nodes: 4','Communication platforms: Gigabit Ethernet and Myrinet 10Gbps'},'interpreter','latex')
 set(gca,'fontsize',12);
 
 set(t,'FontSize',18);
