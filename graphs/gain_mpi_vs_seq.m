@@ -84,13 +84,13 @@ xlim([1 128]) ;
 set(gca,'YTickLabel',num2str(get(gca,'YTick').'));
 
 
-l = legend('Gigabit Ethernet -- dataset 1', 'Gigabit Ethernet -- dataset 3', 'Myrinet 10Gbps -- dataset 1' , 'Myrinet 10Gbps -- dataset 3');
+l = legend('Gigabit Ethernet -- dataset 1', 'Gigabit Ethernet -- dataset 3', 'Myrinet 10Gbps -- dataset 1' , 'Myrinet 10Gbps -- dataset 3', 'Location','northwest');
 
 set(l,'FontSize',12);
-ylabel('Gain');
+ylabel('Speedup');
 
 xlabel('Number of OpenMPI Processes');
-t = title({'\textbf{Relation between total gain and number of OpenMPI processes}','Compute node 641, Dataset sizes 1 and 3, GCC version 4.9.3, OpenMPI version 1.8.4','MPI mapping by core, Max number of nodes: 4','Communication platforms: Gigabit Ethernet and Myrinet 10Gbps'},'interpreter','latex')
+t = title({'\textbf{Relation between total speedup and number of OpenMPI processes}','Compute node 641, Dataset sizes 1 and 3, GCC version 4.9.3, OpenMPI version 1.8.4','MPI mapping by core, Max number of nodes: 4','Communication platforms: Gigabit Ethernet and Myrinet 10Gbps'},'interpreter','latex')
 set(gca,'fontsize',12);
 
 set(t,'FontSize',18);
