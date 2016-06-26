@@ -68,7 +68,7 @@ set(gca,'yscale','log');
 
 grid on;
 set(gca, 'XTick', [1 2 4 8 10 12 14 16 24 32 64 96 128]);
-set(gca, 'YTick', [1 2 4 8 16 32 64]);
+set(gca, 'YTick', [ 0 0.0625 0.125 0.25  0.5 1 2 4 8 16 32 64]);
 
 xlim([1 128]) ;
 ylim([0 96]) ;
