@@ -4,8 +4,6 @@ else % Use Unix/OSX ghostscript call
   system('gs -o -q -sDEVICE=png256 -dEPSCrop -r300 -oimprovedExample_eps.png improvedExample.eps');
 end
 
-
-
 files_eth_1 = dir('../MD_MPI/time_eth/1/*.csv');
 files_myri_1 = dir('../MD_MPI/time_myri/1/*.csv');
 files_eth_3 = dir('../MD_MPI/time_eth/3/*.csv');

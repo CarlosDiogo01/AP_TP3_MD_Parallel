@@ -48,17 +48,47 @@ gain_myri_1 =  base_time_myri_1 ./ times_myri_1;
 gain_myri_3 = base_time_myri_3 ./ times_myri_3;
 
 
+theorical_gain_1_eth = zeros(num_files_eth, 1);
+theorical_gain_3_eth = zeros(num_files_eth, 1);
+theorical_gain_1_myri = zeros(num_files_myri, 1);
+theorical_gain_3_myri = zeros(num_files_myri, 1);
+
+pos = 1; 
+for K = [1 2 4 8 10 12 14 16 22 24 26 28 30 32 34 36 38 64 96 128]
+    theorical_gain_1_eth(pos) = theorical_model_function(50, 8788, 10 , 31, K);
+    theorical_gain_3_eth(pos) = theorical_model_function(50, 19652, 10 , 31, K);
+    pos = pos +1 ;
+
+end
+
+pos=1;
+for K = [1 2 4 8 10 12 14 16 22 24 26 28 30 32]
+    theorical_gain_1_myri(pos) = theorical_model_function(50, 8788, 10 , 3, K);
+    theorical_gain_3_myri(pos) = theorical_model_function(50, 19652, 10 , 3, K);
+        pos = pos +1 ;
+end
+
+    
 bg = [1 1 1; 0 0 0];
 cores = distinguishable_colors(100,bg);
 
 
 plot(eth_ppn,gain_eth_1,'r+--','Color', cores(1,:),'MarkerSize', 8);
 hold on;
+plot(eth_ppn,theorical_gain_1_eth,'Color', cores(10,:),'LineWidth',1);
+hold on;
 plot(eth_ppn,gain_eth_3,'r+--','Color', cores(2,:),'MarkerSize', 8);
 hold on;
-plot(myri_ppn,	gain_myri_1,'ro--','Color', cores(3,:),'MarkerSize', 8);
+plot(eth_ppn,theorical_gain_3_eth,'Color', cores(20,:),'LineWidth',1);
 hold on;
-plot(myri_ppn,gain_myri_3 ,'ro--','Color', cores(4,:),'MarkerSize', 8);
+
+plot(myri_ppn,gain_myri_1,'ro--','Color', cores(3,:),'MarkerSize', 8);
+hold on;
+plot(myri_ppn,theorical_gain_1_myri,'Color', cores(30,:),'LineWidth',1);
+hold on;
+plot(myri_ppn,gain_myri_3,'ro--','Color', cores(4,:),'MarkerSize', 8);
+hold on;
+plot(myri_ppn,theorical_gain_3_myri,'Color', cores(40,:),'LineWidth',1);
 hold on;
 %%%%%
 
@@ -75,7 +105,7 @@ set(gca,'yscale','log');
 
 grid on;
 set(gca, 'XTick', [1 2 4 8 10 12 14 16 24 32 64 96 128]);
-set(gca, 'YTick', [1 2 4 8 16 32 64]);
+set(gca, 'YTick', [1 2 4 8 16 32 64 128]);
 
 xlim([1 128]) ;
 %ylim([0 36]) ;
@@ -84,17 +114,17 @@ xlim([1 128]) ;
 set(gca,'YTickLabel',num2str(get(gca,'YTick').'));
 
 
-l = legend('Gigabit Ethernet -- dataset 1', 'Gigabit Ethernet -- dataset 3', 'Myrinet 10Gbps -- dataset 1' , 'Myrinet 10Gbps -- dataset 3', 'Location','northwest');
+l = legend('Gigabit Ethernet -- dataset 1', 'Theoretical Gigabit Ethernet -- dataset 1', 'Gigabit Ethernet -- dataset 3', 'Theoretical Gigabit Ethernet -- dataset 3', 'Myrinet 10Gbps -- dataset 1' , 'Theoretical Myrinet 10Gbps -- dataset 1',  'Myrinet 10Gbps -- dataset 3', 'Theoretical Myrinet 10Gbps -- dataset 3', 'Location','northwest');
 
 set(l,'FontSize',12);
 ylabel('Speedup');
 
 xlabel('Number of OpenMPI Processes');
-t = title({'\textbf{Relation between total speedup and number of OpenMPI processes}','Compute node 641, Dataset sizes 1 and 3, GCC version 4.9.3, OpenMPI version 1.8.4','MPI mapping by core, Max number of nodes: 4','Communication platforms: Gigabit Ethernet and Myrinet 10Gbps'},'interpreter','latex')
+t = title({'\textbf{Relation between Experimental speedup and Theoretical Speedup}','Compute node 641, Dataset sizes 1 and 3, GCC version 4.9.3, OpenMPI version 1.8.4','MPI mapping by core, Max number of nodes: 4','Communication platforms: Gigabit Ethernet and Myrinet 10Gbps'},'interpreter','latex')
 set(gca,'fontsize',12);
 
 set(t,'FontSize',18);
 
-print('gain_mpi_eth_myri', '-depsc2', '-r300');
+print('theoretical_gain_mpi_eth_myri', '-depsc2', '-r300');
 
 
