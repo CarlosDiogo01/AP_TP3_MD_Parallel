@@ -7,8 +7,7 @@
 #PBS -M filipecosta.90@gmail.com
 #PBS -M sergiocaldas.91@gmail.com
 
-#PBS -l nodes=4:r641:ppn=32
-
+#PBS -l nodes=compute-641-10:ppn=32+compute-641-11:ppn=32+compute-641-12:ppn=32+compute-641-14:ppn=32
 module purge
 module load gnu/4.9.0
 module load gnu/4.9.3
