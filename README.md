@@ -1,1 +1,4 @@
+# Molecular Dynamic Algorithm (MD)
+This is a result of a study about Molecular Dynamic Algorithm (MD). In this work MD simulation source code written in C is provided. The goal of this work is study MD program, his sequential algorithm complexity, and implement a multi-core parallel version in two different programming paradigms: Shared Memory and Distributed memory. The shared memory version of MD will be achieved using OpenMP - an API for multi-platform shared-memory parallel programming in C/C++ and Fortran. The distributed version of MD will be achieved using MPI (Message Passing Interface) using OpenMPI - an high performance message passing library. Initially, we’ll study the program organization (with gprof and callgrind) and study his complexity. For all MD implementations we’re going to produce a performance analysis using compute-641 node of SeARCH Cluster and draw some conclusions.
+
 # AP_TP3_MD_Parallel
